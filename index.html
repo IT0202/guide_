@@ -6,13 +6,18 @@
     <title>災害時 出勤/訪問判断ガイド</title>
     <style>
         :root {
-            --main-blue: #002d5a;
-            --accent-orange: #ff9800;
+            /* NXグループ ブランドカラー */
+            --nx-navy: #001c3d;
+            --nx-lumine: #d4e12e; /* NXルミネ（グリーン） */
+            
             --danger-red: #d32f2f;
-            --bg-gray: #f0f2f5;
+            --bg-gray: #f4f7f9;
             --card-white: #ffffff;
-            --text-dark: #2d3436;
+            --text-dark: #1a1a1a;
             --sub-text: #636e72;
+            
+            /* ハイライト用（ルミネを透過させた色） */
+            --highlight-color: rgba(212, 225, 46, 0.4);
         }
 
         body {
@@ -34,66 +39,67 @@
         }
 
         header {
-            background: var(--main-blue);
+            background: var(--nx-navy);
             color: white;
             padding: 25px 20px;
             text-align: center;
-            border-bottom: 5px solid var(--accent-orange);
+            /* 下線をNXルミネに変更 */
+            border-bottom: 6px solid var(--nx-lumine);
         }
 
-        header h1 { margin: 0; font-size: 1.4rem; font-weight: 800; }
+        header h1 { margin: 0; font-size: 1.4rem; font-weight: 800; letter-spacing: 0.05em; }
         header p { margin: 8px 0 0; font-size: 0.85rem; opacity: 0.9; }
 
         /* 🕒 判断タイムライン */
         .timing-box {
-            background: #fff5f5;
+            background: #fffafa;
             padding: 15px;
             margin: 20px 15px;
             border-radius: 12px;
-            border: 2px dashed var(--danger-red);
+            border: 2px dashed #cbd5e0;
         }
 
-        .timing-title { display: block; text-align: center; font-weight: 800; color: var(--danger-red); margin-bottom: 12px; font-size: 1rem; }
+        .timing-title { display: block; text-align: center; font-weight: 800; color: var(--nx-navy); margin-bottom: 12px; font-size: 1rem; }
         .timeline { display: flex; justify-content: space-between; font-size: 0.8rem; }
         .time-item { text-align: center; flex: 1; }
-        .time-item b { display: block; font-size: 1.2rem; color: var(--main-blue); margin-bottom: 4px; }
+        .time-item b { display: block; font-size: 1.2rem; color: var(--nx-navy); margin-bottom: 4px; }
 
         /* セクション共通 */
         .section { padding: 20px 15px; border-bottom: 1px solid #edf2f7; }
-        .section-title { font-weight: 800; color: var(--main-blue); margin-bottom: 15px; font-size: 1.15rem; display: flex; align-items: center; }
-        .section-title span { background: var(--main-blue); color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 0.85rem; }
+        .section-title { font-weight: 800; color: var(--nx-navy); margin-bottom: 15px; font-size: 1.15rem; display: flex; align-items: center; }
+        .section-title span { background: var(--nx-navy); color: white; width: 28px; height: 28px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; font-size: 0.85rem; }
 
         /* カード型アイテム */
-        .card { background: #f8fafc; border-left: 6px solid var(--main-blue); padding: 15px; border-radius: 10px; margin-bottom: 15px; position: relative; }
+        .card { background: #f8fafc; border-left: 6px solid var(--nx-navy); padding: 15px; border-radius: 10px; margin-bottom: 15px; position: relative; }
         .card.warning { border-left-color: var(--danger-red); }
-        .card.visit { border-left-color: var(--accent-orange); background: #fffaf0; }
+        
+        /* 訪問判断カード（NXルミネを使用） */
+        .card.visit { 
+            border-left-color: var(--nx-lumine); 
+            background: rgba(212, 225, 46, 0.05); 
+        }
 
         .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
         .label { font-size: 0.9rem; font-weight: 800; color: var(--danger-red); }
-        .visit-label { color: #e67e22; font-weight: 800; font-size: 0.9rem; }
+        .visit-label { color: var(--nx-navy); font-weight: 800; font-size: 0.9rem; }
         .source-tag { font-size: 0.7rem; color: #7f8c8d; background: #dfe6e9; padding: 2px 8px; border-radius: 4px; font-weight: bold; }
 
         .main-text { font-size: 1.1rem; font-weight: 800; display: block; margin: 5px 0; }
-        .highlight { background: linear-gradient(transparent 70%, #ffecb3 0%); color: var(--danger-red); }
+        /* ハイライトをルミネグリーン系に変更 */
+        .highlight { background: linear-gradient(transparent 60%, var(--highlight-color) 0%); }
 
-        /* 灰色フォントの補足 */
         .sub-note { font-size: 0.8rem; color: var(--sub-text); display: block; margin-top: 5px; line-height: 1.4; }
 
-        /* 連絡手段 */
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 10px; }
-        .contact-box { background: #fff; border: 2px solid #edf2f7; border-radius: 12px; padding: 15px 10px; text-align: center; }
-        .contact-box b { display: block; font-size: 1rem; color: var(--main-blue); margin-bottom: 8px; }
-        .contact-box p { font-size: 0.75rem; margin: 0; color: #4a5568; line-height: 1.4; }
-
         /* 🔗 リンク集 */
-        .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
         .link-btn { display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #d1d8e0; padding: 12px 5px; border-radius: 8px; text-decoration: none; color: var(--text-dark); font-size: 0.75rem; font-weight: bold; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
-        .btn-full { grid-column: span 2; background: #2980b9; color: white; border: none; font-size: 0.95rem; padding: 14px; margin-bottom: 5px; }
+        .btn-full { grid-column: span 2; background: var(--nx-navy); color: white; border: none; font-size: 0.95rem; padding: 14px; margin-bottom: 5px; }
         .btn-jma { grid-column: span 2; background: #27ae60; color: white; border: none; padding: 12px; margin-bottom: 5px; }
 
+        .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+
         /* フッター */
-        footer { background: #fffbe6; padding: 20px; font-size: 0.85rem; color: #856404; border-top: 1px solid #ffe066; }
-        .footer-bold { font-weight: 800; display: block; margin-bottom: 5px; }
+        footer { background: #fdfdfd; padding: 20px; font-size: 0.85rem; color: #4a5568; border-top: 2px solid var(--nx-lumine); }
+        .footer-bold { font-weight: 800; display: block; margin-bottom: 5px; color: var(--nx-navy); }
     </style>
 </head>
 <body>
@@ -106,10 +112,10 @@
 
     <!-- 🕒 タイムライン -->
     <div class="timing-box">
-        <span class="timing-title"> 判断のデッドライン（目安）</span>
+        <span class="timing-title">判断のデッドライン（目安）</span>
         <div class="timeline">
             <div class="time-item"><span>前夜の判断</span><b>17:00</b><span>台風・計画運休</span></div>
-            <div style="align-self: center; color: #ccc; font-size: 1.2rem;">▶</div>
+            <div style="align-self: center; color: #cbd5e0; font-size: 1.2rem;">▶</div>
             <div class="time-item"><span>当日朝の判断</span><b>出勤前</b><span>急な警報・遅延</span></div>
         </div>
     </div>
@@ -119,21 +125,21 @@
         <div class="section-title"><span>1</span> 支店出社 or 在宅切替の基準</div>
         
         <div class="card warning">
-            <div class="card-header"><span class="label"> 地震</span><span class="source-tag">緊急地震速報</span></div>
+            <div class="card-header"><span class="label">地震</span><span class="source-tag">緊急地震速報</span></div>
             <span class="main-text">自宅 or 勤務地で <span class="highlight">震度5弱以上</span> を観測</span>
-	    <span class="sub-note">※移動中の観測も含む</span>
+            <span class="sub-note">※移動中の観測も含む</span>
         </div>
 
         <div class="card warning">
-            <div class="card-header"><span class="label"> 台風</span><span class="source-tag">気象庁発表</span></div>
+            <div class="card-header"><span class="label">台風</span><span class="source-tag">気象庁発表</span></div>
             <span class="main-text"><span class="highlight">暴風警報・大雨警報</span> の発令</span>
             <span class="sub-note">※前日時点で発令が見込まれる場合を含む</span>
         </div>
 
         <div class="card warning">
-            <div class="card-header"><span class="label"> 公共交通機関</span><span class="source-tag">各鉄道会社</span></div>
-            <span class="main-text"><span class="highlight">計画運休</span> または <span class="highlight">広域範囲,複数路線での運転見合わせ</span></span>
-            <span class="sub-note">※「振替輸送の停止」「20分以上の大幅な遅延」も含む</span>
+            <div class="card-header"><span class="label">公共交通機関</span><span class="source-tag">各鉄道会社</span></div>
+            <span class="main-text"><span class="highlight">計画運休</span> または <span class="highlight">運転見合わせ</span></span>
+            <span class="sub-note">※20分以上の大幅な遅延・振替輸送停止を含む</span>
         </div>
     </div>
 
@@ -142,33 +148,32 @@
         <div class="section-title"><span>2</span> 他拠点・顧客先への訪問可否</div>
         
         <div class="card visit">
-            <div class="card-header"><span class="visit-label"> 判断タイミング<span class="sub-note">移動リスクを最小限にするための措置</span></div>
+            <div class="card-header"><span class="visit-label">判断タイミング</span><span class="source-tag">リスク回避</span></div>
             <span class="main-text"> 前日予報は ❶基準より <span class="highlight">＋1日前倒し</span></span>
-            <span class="sub-note"> ⇒ 対応：延期またはWeb会議への切替</span>
+            <span class="sub-note"> ⇒ 対応：延期またはWeb会議への切替を推奨</span>
         </div>
-
     </div>
 
     <!-- 3. 🔗 リンク集 -->
-    <div class="section" style="background: #f1f4f8;">
+    <div class="section" style="background: #f8fafc;">
         <div class="section-title"><span>3</span> リアルタイム情報収集</div>
         
         <a href="https://transit.yahoo.co.jp/diainfo/area/6" class="link-btn btn-full" target="_blank">🗺️ 関西の運行情報一覧（Yahoo!）</a>
         <a href="https://www.jma.go.jp/bosai/#area_type=japan&area_code=010000&pattern=default" class="link-btn btn-jma" target="_blank">🌦️ 気象庁 防災情報（公式）</a>
 
         <div class="link-grid">
-            <a href="https://trafficinfo.westjr.co.jp/kinki.html" class="link-btn" target="_blank">🚄 JR西日本</a>
-            <a href="https://subway.osakametro.co.jp/guide/subway_information.php" class="link-btn" target="_blank">🚇 大阪メトロ</a>
-            <a href="https://www.hankyu.co.jp/railinfo/" class="link-btn" target="_blank">🚃 阪急電鉄</a>
-            <a href="https://www.kintetsu.jp/unkou/unkou.html" class="link-btn" target="_blank">🦌 近鉄電車</a>
-            <a href="https://www.keihan.co.jp/traffic/traintraffic/" class="link-btn" target="_blank">🔴 京阪電車</a>
-            <a href="https://www.hanshin.co.jp/" class="link-btn" target="_blank">🐯 阪神電車</a>
+            <a href="https://trafficinfo.westjr.co.jp/kinki.html" class="link-btn" target="_blank">JR西日本</a>
+            <a href="https://subway.osakametro.co.jp/guide/subway_information.php" class="link-btn" target="_blank">大阪メトロ</a>
+            <a href="https://www.hankyu.co.jp/railinfo/" class="link-btn" target="_blank">阪急電鉄</a>
+            <a href="https://www.kintetsu.jp/unkou/unkou.html" class="link-btn" target="_blank">近鉄電車</a>
+            <a href="https://www.keihan.co.jp/traffic/traintraffic/" class="link-btn" target="_blank">京阪電車</a>
+            <a href="https://www.hanshin.co.jp/" class="link-btn" target="_blank">阪神電車</a>
         </div>
     </div>
 
     <footer>
         <span class="footer-bold">⚠️ 安全最優先の原則：</span>
-        数値はあくまで目安です。基準外であっても、個々の通勤経路の状況や移動中の危険（河川増水・避難指示等）を感じる場合は、自身の安全確保を最優先とし、迷わず上長へ相談してください。
+        数値はあくまで目安です。基準外であっても、個々の通勤経路の状況や移動中の危険を感じる場合は、自身の安全確保を最優先とし、迷わず上長へ相談してください。
     </footer>
 </div>
 
